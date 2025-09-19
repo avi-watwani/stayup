@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(210, 20%, 98%);
+  --foreground: hsl(220, 20%, 15%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(220, 20%, 15%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(220, 20%, 15%);
+  --primary: hsl(142, 86%, 28%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(210, 40%, 96%);
+  --secondary-foreground: hsl(220, 20%, 15%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(220, 14%, 45%);
+  --accent: hsl(25, 95%, 53%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(220, 13%, 91%);
+  --input: hsl(220, 13%, 91%);
+  --ring: hsl(142, 86%, 28%);
+  --radius: 12px;
+}
+
+.dark {
+  --background: hsl(220, 20%, 8%);
+  --foreground: hsl(210, 20%, 95%);
+  --card: hsl(220, 20%, 12%);
+  --card-foreground: hsl(210, 20%, 95%);
+  --popover: hsl(220, 20%, 12%);
+  --popover-foreground: hsl(210, 20%, 95%);
+  --primary: hsl(142, 86%, 28%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(220, 20%, 15%);
+  --secondary-foreground: hsl(210, 20%, 95%);
+  --muted: hsl(220, 20%, 15%);
+  --muted-foreground: hsl(220, 14%, 65%);
+  --accent: hsl(25, 95%, 53%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(220, 20%, 20%);
+  --input: hsl(220, 20%, 20%);
+  --ring: hsl(142, 86%, 28%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer components {
+  .timer-circle {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .timer-circle.active {
+    background: linear-gradient(135deg, hsl(142, 86%, 28%), hsl(142, 76%, 38%));
+    box-shadow: 0 0 0 8px hsla(142, 86%, 28%, 0.1), 0 8px 32px hsla(142, 86%, 28%, 0.2);
+  }
+
+  .preset-btn {
+    transition: all 0.2s ease;
+  }
+
+  .preset-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .preset-btn.active {
+    background: hsl(142, 86%, 28%);
+    color: hsl(0, 0%, 100%);
+  }
+
+  .progress-ring {
+    transform: rotate(-90deg);
+    transition: stroke-dashoffset 0.3s ease;
+  }
+}
