@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useWakeLock } from "@/hooks/use-wake-lock";
 import { useTimer } from "@/hooks/use-timer";
-import { useUsageStats } from "@/hooks/use-usage-stats";
 import { useToast } from "@/hooks/use-toast";
 import TimerDisplay from "@/components/timer-display";
 import TimerPresets from "@/components/timer-presets";
 import CustomTimeInput from "@/components/custom-time-input";
 import MainTimerControl from "@/components/main-timer-control";
-import UsageStats from "@/components/usage-stats";
 import FAQSection from "@/components/faq-section";
 
 export default function Home() {
@@ -16,7 +14,6 @@ export default function Home() {
   
   const { toast } = useToast();
   const wakeLock = useWakeLock();
-  const usageStats = useUsageStats();
   
   const timer = useTimer(() => {
     wakeLock.release();
@@ -27,15 +24,14 @@ export default function Home() {
   });
 
   const handleStart = async () => {
-    const duration = selectedPreset || customMinutes * 60;
+    let duration = selectedPreset || customMinutes * 60;
     
     if (duration <= 0) {
+      duration = 3600; // Default to 1 hour if no valid duration is set
       toast({
-        title: "Please select a duration",
-        description: "Choose a preset or enter custom minutes.",
-        variant: "destructive"
+        title: "Using default duration",
+        description: "No duration selected, defaulting to 1 hour.",
       });
-      return;
     }
 
     const success = await wakeLock.request();
@@ -57,12 +53,6 @@ export default function Home() {
   const handleStop = () => {
     timer.stop();
     wakeLock.release();
-    
-    // Add elapsed time to stats (in minutes)
-    if (timer.totalTime > 0) {
-      const elapsedMinutes = Math.floor((timer.totalTime - timer.remainingTime) / 60);
-      usageStats.addTime(elapsedMinutes);
-    }
     
     toast({
       title: "Timer stopped",
@@ -123,10 +113,6 @@ export default function Home() {
             onStop={handleStop}
           />
 
-          <UsageStats 
-            stats={usageStats}
-          />
-
         </div>
       </main>
 
@@ -138,15 +124,6 @@ export default function Home() {
           <p className="text-muted-foreground text-sm">
             Built with the Screen Wake Lock API • Privacy-focused • No data collection
           </p>
-          <div className="mt-4">
-            <a href="#" className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80 transition-colors" data-testid="link-coffee">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
-                <path d="M11 7h2v2h-2zm0 4h2v6h-2z"/>
-              </svg>
-              Buy me a coffee
-            </a>
-          </div>
         </div>
       </footer>
     </div>

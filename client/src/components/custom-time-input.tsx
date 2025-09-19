@@ -9,8 +9,8 @@ export default function CustomTimeInput({ customMinutes, onCustomMinutesChange }
       <div className="flex items-center justify-center gap-2">
         <input
           type="number"
-          placeholder="Minutes"
-          min="1"
+          placeholder="0"
+          min="2"
           max="999"
           value={customMinutes || ""}
           onChange={(e) => onCustomMinutesChange(parseInt(e.target.value) || 0)}

@@ -2,7 +2,7 @@
 
 ## Overview
 
-AwakeKeeper is a React-based web application that prevents screen sleep using the Screen Wake Lock API. The app allows users to set timers with preset durations or custom time intervals to keep their device screens awake. It features a modern, accessible UI built with shadcn/ui components and includes usage statistics tracking and an FAQ section for user guidance.
+AwakeKeeper is a React-based web application that prevents screen sleep using the Screen Wake Lock API. The app allows users to set timers with preset durations or custom time intervals to keep their device screens awake. It features a modern, accessible UI built with shadcn/ui components and an FAQ section for user guidance.
 
 ## User Preferences
 
@@ -21,35 +21,27 @@ Preferred communication style: Simple, everyday language.
 
 ### Backend Architecture
 - **Runtime**: Node.js with Express.js server
-- **Database ORM**: Drizzle ORM configured for PostgreSQL
-- **Session Management**: PostgreSQL-backed sessions using connect-pg-simple
-- **API Pattern**: RESTful API structure with `/api` prefix
+- **API Pattern**: RESTful API structure with `/api` prefix (if needed)
 - **Development**: Hot module replacement via Vite middleware integration
 
 ### Core Features
 - **Wake Lock Management**: Browser Screen Wake Lock API integration with fallback handling
 - **Timer System**: Preset durations (30 min, 1 hr, 2 hr) and custom time input
-- **Usage Analytics**: Local storage-based statistics tracking with daily/weekly summaries
 - **Progressive UI**: Responsive design with mobile-first approach
 - **Accessibility**: ARIA labels, semantic HTML, and keyboard navigation support
 
 ### Data Storage Solutions
-- **Database**: PostgreSQL with Neon serverless hosting
-- **Local Storage**: Browser localStorage for usage statistics and user preferences
-- **Session Store**: PostgreSQL-based session management for user authentication
-- **Schema Management**: Drizzle migrations with TypeScript schema definitions
+- **No persistent storage**: Application works entirely in browser without data collection
 
 ### Development Architecture
-- **Monorepo Structure**: Shared schema between client and server in `/shared` directory
-- **Path Aliases**: TypeScript path mapping for clean imports (`@/`, `@shared/`)
+- **Monorepo Structure**: Client and server code organized in separate directories
+- **Path Aliases**: TypeScript path mapping for clean imports (`@/`)
 - **Environment**: Development/production environment detection with appropriate tooling
 - **Error Handling**: Runtime error overlay for development debugging
 
 ## External Dependencies
 
 ### Core Dependencies
-- **@neondatabase/serverless**: Neon PostgreSQL serverless database driver
-- **drizzle-orm**: TypeScript ORM for database operations
 - **@tanstack/react-query**: Server state management and caching
 - **wouter**: Lightweight React router
 - **date-fns**: Date manipulation and formatting utilities
@@ -68,5 +60,4 @@ Preferred communication style: Simple, everyday language.
 
 ### Browser APIs
 - **Screen Wake Lock API**: Primary functionality for preventing screen sleep
-- **Local Storage API**: Usage statistics persistence
 - **Notification API**: Timer completion notifications (when supported)
