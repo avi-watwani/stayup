@@ -10,13 +10,39 @@ import FAQSection from "@/components/faq-section";
 
 export default function Home() {
   const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
+  const [customHours, setCustomHours] = useState<number>(0);
   const [customMinutes, setCustomMinutes] = useState<number>(0);
   
   const { toast } = useToast();
   const wakeLock = useWakeLock();
+
+  // Handle preset selection and clear custom input
+  const handlePresetSelect = (duration: number | null) => {
+    setSelectedPreset(duration);
+    if (duration !== null) {
+      setCustomHours(0);
+      setCustomMinutes(0); // Clear custom input when preset is selected
+    }
+  };
+
+  // Handle custom time input and clear preset selection
+  const handleCustomTimeChange = (hours: number, minutes: number) => {
+    setCustomHours(hours);
+    setCustomMinutes(minutes);
+    if (hours > 0 || minutes > 0) {
+      setSelectedPreset(null); // Clear preset when custom time is entered
+    }
+  };
+
+  const clearAllInputs = () => {
+    setSelectedPreset(null);
+    setCustomHours(0);
+    setCustomMinutes(0);
+  }
   
   const timer = useTimer(() => {
     wakeLock.release();
+    clearAllInputs();
     toast({
       title: "Timer completed!",
       description: "Your screen wake lock has been released.",
@@ -25,7 +51,7 @@ export default function Home() {
 
   const handleStart = async () => {
     let description = "";
-    let duration = selectedPreset || customMinutes * 60;
+    let duration = selectedPreset || (customHours * 3600 + customMinutes * 60);
     
     if (duration <= 0) {
       duration = 3600; // Default to 1 hour if no valid duration is set
@@ -53,6 +79,7 @@ export default function Home() {
   const handleStop = () => {
     timer.stop();
     wakeLock.release();
+    clearAllInputs();
     
     toast({
       title: "Timer stopped",
@@ -98,12 +125,13 @@ export default function Home() {
 
           <TimerPresets 
             selectedPreset={selectedPreset}
-            onSelectPreset={setSelectedPreset}
+            onSelectPreset={handlePresetSelect}
           />
 
           <CustomTimeInput 
+            customHours={customHours}
             customMinutes={customMinutes}
-            onCustomMinutesChange={setCustomMinutes}
+            onCustomTimeChange={handleCustomTimeChange}
           />
 
           <MainTimerControl 
