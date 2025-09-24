@@ -7,6 +7,7 @@ import TimerPresets from "@/components/timer-presets";
 import CustomTimeInput from "@/components/custom-time-input";
 import MainTimerControl from "@/components/main-timer-control";
 import FAQSection from "@/components/faq-section";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
@@ -104,13 +105,18 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="w-full py-6 px-4" data-testid="header">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2" data-testid="title">
-            Stay Up
-          </h1>
-          <p className="text-muted-foreground text-sm sm:text-base" data-testid="subtitle">
-            Keep your screen awake with a simple click
-          </p>
+        <div className="max-w-4xl mx-auto relative">
+          <div className="absolute top-0 right-0">
+            <ThemeToggle />
+          </div>
+          <div className="text-center">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2" data-testid="title">
+              Stay Up
+            </h1>
+            <p className="text-muted-foreground text-sm sm:text-base" data-testid="subtitle">
+              Keep your screen awake with a simple click
+            </p>
+          </div>
         </div>
       </header>
 

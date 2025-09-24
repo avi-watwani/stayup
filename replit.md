@@ -1,8 +1,8 @@
-# AwakeKeeper
+# Stay Up
 
 ## Overview
 
-AwakeKeeper is a React-based web application that prevents screen sleep using the Screen Wake Lock API. The app allows users to set timers with preset durations or custom time intervals to keep their device screens awake. It features a modern, accessible UI built with shadcn/ui components and an FAQ section for user guidance.
+Stay Up is a React-based web application that prevents screen sleep using the Screen Wake Lock API. The app allows users to set timers with preset durations or custom time intervals to keep their device screens awake. It features a modern, accessible UI built with shadcn/ui components and an FAQ section for user guidance.
 
 ## User Preferences
 

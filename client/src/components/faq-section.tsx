@@ -9,7 +9,7 @@ export default function FAQSection() {
         <div className="space-y-4">
           <details className="bg-card rounded-lg border border-border overflow-hidden" data-testid="faq-how-to-use">
             <summary className="px-6 py-4 cursor-pointer hover:bg-muted transition-colors font-medium text-foreground">
-              How do I use AwakeKeeper?
+              How do I use Stay Up?
             </summary>
             <div className="px-6 py-4 pt-0 text-muted-foreground border-t border-border">
               Click the central button to start or stop keeping your screen awake. You can select preset durations or enter a custom time to prevent your screen from sleeping.
@@ -30,7 +30,7 @@ export default function FAQSection() {
               Does this work on mobile devices?
             </summary>
             <div className="px-6 py-4 pt-0 text-muted-foreground border-t border-border">
-              Yes! AwakeKeeper works on both desktop and mobile browsers that support the Screen Wake Lock API. Keep the tab active and your device unlocked for best results.
+              Yes! Stay Up works on both desktop and mobile browsers that support the Screen Wake Lock API. Keep the tab active and your device unlocked for best results.
             </div>
           </details>
         </div>
