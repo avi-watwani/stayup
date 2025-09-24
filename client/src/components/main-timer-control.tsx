@@ -28,7 +28,7 @@ export default function MainTimerControl({ isActive, progress, onStart, onStop }
             cx="60" 
             cy="60" 
             r="54"
-            stroke="hsl(142 86% 28%)"
+            stroke={isActive ? "hsl(0 84% 60%)" : "hsl(142 86% 28%)"}
             strokeWidth="4"
             fill="none"
             className="progress-ring"
@@ -49,12 +49,12 @@ export default function MainTimerControl({ isActive, progress, onStart, onStop }
           <div className="text-center">
             <div className="w-8 h-8 mx-auto mb-1 flex items-center justify-center">
               {isActive ? (
-                <Pause className="w-6 h-6 text-primary-foreground" data-testid="icon-pause" />
+                <Pause className="w-6 h-6 text-white" data-testid="icon-pause" />
               ) : (
                 <Play className="w-6 h-6 text-foreground" data-testid="icon-play" />
               )}
             </div>
-            <span className="text-xs font-medium text-muted-foreground" data-testid="text-button-label">
+            <span className={`text-xs font-medium ${isActive ? 'text-white' : 'text-muted-foreground'}`} data-testid="text-button-label">
               {isActive ? "Stop" : "Start"}
             </span>
           </div>
