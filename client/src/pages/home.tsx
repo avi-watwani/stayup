@@ -24,22 +24,22 @@ export default function Home() {
   });
 
   const handleStart = async () => {
+    let description = "";
     let duration = selectedPreset || customMinutes * 60;
     
     if (duration <= 0) {
       duration = 3600; // Default to 1 hour if no valid duration is set
-      toast({
-        title: "Using default duration",
-        description: "No duration selected, defaulting to 1 hour.",
-      });
+      description = "No duration selected, defaulting to 1 hour.";
+
     }
 
     const success = await wakeLock.request();
     if (success) {
+      description = description || "Your screen will stay awake for the selected duration.";
       timer.start(duration);
       toast({
         title: "Wake lock activated",
-        description: "Your screen will stay awake for the selected duration.",
+        description: description,
       });
     } else {
       toast({
@@ -79,7 +79,7 @@ export default function Home() {
       <header className="w-full py-6 px-4" data-testid="header">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2" data-testid="title">
-            AwakeKeeper
+            Stay Up
           </h1>
           <p className="text-muted-foreground text-sm sm:text-base" data-testid="subtitle">
             Keep your screen awake with a simple click
